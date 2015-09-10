@@ -28,7 +28,7 @@ public class Pusher {
 
 	public void push(String inputStr) {
 		
-		String requestJson = "{\"platform\":\"1\", \"msg\":\"Hi from Tali\" ,\"badge\":\"10\" ,\"sound\":\"default\"}";
+		String requestJson = "{\"platform\":\"1\", \"msg\":\""+inputStr+"\" ,\"badge\":\"10\" ,\"sound\":\"default\"}";
 		try {
 			CloseableHttpClient httpclient = HttpClients.createDefault();
 			HttpPost httpPost = new HttpPost("https://api.pushbots.com/push/all");
@@ -70,6 +70,10 @@ public class Pusher {
 
 	public static void main(String[] args) {
 		Pusher pusher = new Pusher();
-		pusher.push("");
+		if(args.length == 0){
+			pusher.push("Test ..");
+		}else{
+			pusher.push(args[0]);
+		}
 	}
 }
